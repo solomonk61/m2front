@@ -1,5 +1,9 @@
 module.exports = {
-  purge: ["./pages/**/*.tsx", "./src/**/*.tsx"],
+  content: [
+    "./pages/**/*.tsx",
+    "./src/**/*.tsx",
+    "./node_modules/flowbite/**/*.js",
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
@@ -7,5 +11,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms"), require("flowbite/plugin")],
 };

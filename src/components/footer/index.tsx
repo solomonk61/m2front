@@ -1,56 +1,37 @@
 import React from "react";
-import Image from "next/image";
 
 export const Footer: React.FC = () => {
   return (
-    <div className="text-center py-5 bg-gray-800">
-      <a
-        href="https://github.com/pankod"
-        target="_blank"
-        className="block mb-3"
-      >
-        <Image
-          src="/icons/pankod-icon.svg"
-          alt="pankod"
-          width="140"
-          height="28"
-        />
-      </a>
-
-      <ul className="flex justify-center list-none p-0 m-0">
-        <li className="mx-3">
-          <Image
-            src="/icons/github-icon.svg"
-            alt="github"
-            width="28"
-            height="29"
-          />
+    <footer className="p-4 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
+      <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+        © 2022{" "}
+        <a href="https://flowbite.com" className="hover:underline">
+          Flowbite™
+        </a>
+        . All Rights Reserved.
+      </span>
+      <ul className="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
+        <li>
+          <a href="#" className="mr-4 hover:underline md:mr-6 ">
+            About
+          </a>
         </li>
-        <li className="mx-3">
-          <Image
-            src="/icons/twitter-icon.svg"
-            alt="nextjs"
-            width="28"
-            height="28"
-          />
+        <li>
+          <a href="#" className="mr-4 hover:underline md:mr-6">
+            Privacy Policy
+          </a>
         </li>
-        <li className="mx-3">
-          <Image
-            src="/icons/youtube-icon.svg"
-            alt="youtube"
-            width="28"
-            height="29"
-          />
+        <li>
+          <a href="#" className="mr-4 hover:underline md:mr-6">
+            Licensing
+          </a>
         </li>
-        <li className="mx-3">
-          <Image
-            src="/icons/linkedin-icon.svg"
-            alt="linkedin"
-            width="28"
-            height="32"
-          />
+        <li>
+          <a href="#" className="hover:underline">
+            Contact
+          </a>
         </li>
       </ul>
-    </div>
+    </footer>
   );
 };
