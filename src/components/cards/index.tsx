@@ -32,7 +32,7 @@ export const CommentCard: React.FC<CommentProps> = ({ comment }) => {
   return (
     <div className="bg-white rounded-lg p-3  flex flex-col justify-center items-center md:items-start shadow-lg mb-4">
       <div className="flex flex-row justify-center mr-2">
-        <img
+        {/* <img
           alt="avatar"
           width="48"
           height="48"
@@ -42,6 +42,18 @@ export const CommentCard: React.FC<CommentProps> = ({ comment }) => {
             "" +
             comment?.users_permissions_user?.avatar?.url
           }
+        /> */}
+
+        <Image
+          className="w-12 h-12 rounded-full object-cover mr-4 shadow"
+          src={
+            process.env.NEXT_PUBLIC_API_URL +
+            "" +
+            comment?.users_permissions_user?.avatar?.url
+          }
+          width={48}
+          height={48}
+          alt="avatar"
         />
         <h3 className="text-purple-600 font-semibold text-lg text-center md:text-left ">
           {comment?.users_permissions_user?.username}
@@ -82,8 +94,8 @@ export const PostCard: React.FC<PostProps> = ({ post }) => {
             "" +
             post?.users_permissions_user?.avatar?.url
           }
-          width={150}
-          height={150}
+          width={60}
+          height={60}
           alt="avatar"
         />
         <div className="ml-4">

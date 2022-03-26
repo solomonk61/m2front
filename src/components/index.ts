@@ -6,3 +6,4 @@ export { PostsCards, PostCard, CommentsCards, CommentCard } from "./cards";
 export { Footer } from "./footer";
 export { Container } from "./container";
 export { NewPost, NewComment } from "./forms";
+export { Pagination } from "./pagination";
