@@ -38,7 +38,7 @@ export const CommentCard: React.FC<CommentProps> = ({ comment }) => {
           height="48"
           className="rounded-full w-10 h-10 mr-4 shadow-lg mb-4"
           src={
-            process.env.NEXT_PUBLIC_ADMIN_URL +
+            process.env.NEXT_PUBLIC_API_URL +
             "" +
             comment?.users_permissions_user?.avatar?.url
           }
@@ -78,7 +78,7 @@ export const PostCard: React.FC<PostProps> = ({ post }) => {
         <Image
           className="w-12 h-12 rounded-full object-cover mr-4 shadow"
           src={
-            process.env.NEXT_PUBLIC_ADMIN_URL +
+            process.env.NEXT_PUBLIC_API_URL +
             "" +
             post?.users_permissions_user?.avatar?.url
           }

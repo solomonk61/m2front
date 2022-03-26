@@ -1,7 +1,24 @@
 import React from "react";
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export const Header: React.FC = () => {
+  const { data: session } = useSession();
+  // if (session) {
+  //   return (
+  //     <>
+  //       Signed in as {session.user?.email} <br />
+  //       <button onClick={() => signOut()}>Sign out</button>
+  //     </>
+  //   );
+  // }
+  // return (
+  //   <>
+  //     Not signed in <br />
+  //     <button onClick={() => signIn()}>Sign in</button>
+  //   </>
+  // );
+
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
@@ -18,12 +35,23 @@ export const Header: React.FC = () => {
           </a>
         </Link>
         <div className="flex md:order-2">
-          <button
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Get started
-          </button>
+          {session ? (
+            <button
+              type="button"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              onClick={() => signOut()}
+            >
+              Logout
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              onClick={() => signIn()}
+            >
+              Login
+            </button>
+          )}
           <button
             data-collapse-toggle="mobile-menu-4"
             type="button"
