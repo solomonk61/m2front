@@ -1,35 +1,38 @@
 import React, { useEffect } from "react";
-import { Container, Header, Main, Footer, Card, NewPost } from "@components";
+import {
+  Container,
+  Header,
+  Main,
+  Footer,
+  PostCard,
+  NewPost,
+  NewComment,
+  CommentsCards,
+} from "@components";
 import { client, GET_POST } from "@gql";
-import { GetPostQuery } from "@graphqlTypes/__types__";
+import { GetPostQuery } from "@graphqlTypcaes/__types__";
 import { GetServerSideProps } from "next";
 
-type Props = { data: GetPostQuery["post"] };
+type Props = { post: GetPostQuery["post"] };
 
-const Post: React.FC<Props> = ({ data }) => {
-  useEffect(() => {
-    console.log(data);
-  });
-
+const Post: React.FC<Props> = ({ post }) => {
   return (
     <Container>
-      <Header />
-      {/* <Main /> */}
-      <div className="container mx-auto px-60">
-        <Card post={data} />
-      </div>
-      <Footer />
+      <PostCard post={post} />
+      <NewComment />
+      <CommentsCards data={post.comments} />
+      {/* <p>{JSON.stringify(post?.comments)}</p> */}
     </Container>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
-  const { post: data } = await client.request(GET_POST, { id });
+  const { post } = await client.request(GET_POST, { id });
 
   return {
     props: {
-      data,
+      post,
     },
   };
 };

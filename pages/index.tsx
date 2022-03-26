@@ -1,5 +1,12 @@
 import React, { useEffect } from "react";
-import { Container, Header, Main, Footer, Cards, NewPost } from "@components";
+import {
+  Container,
+  Header,
+  Main,
+  Footer,
+  PostsCards,
+  NewPost,
+} from "@components";
 import { client, GET_POSTS } from "@gql";
 import { GetPostsQuery } from "@graphqlTypes/__types__";
 import { GetStaticProps } from "next";
@@ -13,13 +20,8 @@ const Home: React.FC<Props> = ({ data }) => {
 
   return (
     <Container>
-      <Header />
-      {/* <Main /> */}
-      <div className="container mx-auto px-60">
-        {/* <NewPost /> */}
-        <Cards data={data} />
-      </div>
-      <Footer />
+      {/* <NewPost /> */}
+      <PostsCards data={data} />
     </Container>
   );
 };
