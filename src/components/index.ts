@@ -7,3 +7,4 @@ export { Footer } from "./footer";
 export { Container } from "./container";
 export { NewPost, NewComment } from "./forms";
 export { Pagination } from "./pagination";
+export { AuthModal } from "./modals";

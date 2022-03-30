@@ -10,6 +10,7 @@ RUN npm ci
 
 COPY . /opt/app
 
-RUN npm install --dev && npm run build
+RUN npm install
+# RUN npm install --dev && npm run build
 
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "dev" ]
