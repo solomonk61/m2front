@@ -115,6 +115,7 @@ export type LocaleInput = {
 
 
 
+
 export type PostInput = {
   title?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
@@ -125,6 +126,7 @@ export type PostInput = {
   users_permissions_user?: Maybe<Scalars['ID']>;
   topics?: Maybe<Array<Maybe<Scalars['ID']>>>;
   slug?: Maybe<Scalars['String']>;
+  from_reddit?: Maybe<Scalars['Boolean']>;
   published_at?: Maybe<Scalars['DateTime']>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
@@ -209,7 +211,7 @@ export type UserInput = {
   confirmed?: Maybe<Scalars['Boolean']>;
   blocked?: Maybe<Scalars['Boolean']>;
   role?: Maybe<Scalars['ID']>;
-  fromReddit?: Maybe<Scalars['Boolean']>;
+  from_reddit?: Maybe<Scalars['Boolean']>;
   avatar?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
   birthday?: Maybe<Scalars['Date']>;
@@ -365,6 +367,7 @@ export type EditPostInput = {
   users_permissions_user?: Maybe<Scalars['ID']>;
   topics?: Maybe<Array<Maybe<Scalars['ID']>>>;
   slug?: Maybe<Scalars['String']>;
+  from_reddit?: Maybe<Scalars['Boolean']>;
   published_at?: Maybe<Scalars['DateTime']>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
@@ -402,7 +405,7 @@ export type EditUserInput = {
   confirmed?: Maybe<Scalars['Boolean']>;
   blocked?: Maybe<Scalars['Boolean']>;
   role?: Maybe<Scalars['ID']>;
-  fromReddit?: Maybe<Scalars['Boolean']>;
+  from_reddit?: Maybe<Scalars['Boolean']>;
   avatar?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
   birthday?: Maybe<Scalars['Date']>;
