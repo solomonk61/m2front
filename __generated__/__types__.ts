@@ -446,6 +446,15 @@ export type UpdateUserInput = {
 };
 
 
+export type CreateCommentMutationVariables = Exact<{
+  content?: Maybe<Scalars['String']>;
+  user?: Maybe<Scalars['ID']>;
+  post?: Maybe<Scalars['ID']>;
+}>;
+
+
+export type CreateCommentMutation = { __typename?: 'Mutation', createComment?: Maybe<{ __typename?: 'createCommentPayload', comment?: Maybe<{ __typename?: 'Comment', id: string, content?: Maybe<string> }> }> };
+
 export type GetPostsQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   start?: Maybe<Scalars['Int']>;

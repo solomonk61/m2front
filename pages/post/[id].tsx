@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Header,
@@ -9,17 +9,41 @@ import {
   NewComment,
   CommentsCards,
 } from "@components";
-import { client, GET_POST } from "@gql";
-import { GetPostQuery } from "@graphqlTypcaes/__types__";
+import { client, GET_POST, ADD_COMMENT } from "@gql";
+import { CommentInput, GetPostQuery } from "@graphqlTypes/__types__";
 import { GetServerSideProps } from "next";
+import Router from "next/router";
+import { getSession } from "next-auth/client";
 
 type Props = { post: GetPostQuery["post"] };
 
 const Post: React.FC<Props> = ({ post }) => {
+  const [loading, setloading] = useState(false);
+  const onPost = async (content: CommentInput["content"]) => {
+    setloading(true);
+    const session = await getSession();
+    client
+      .request(
+        ADD_COMMENT,
+        {
+          content,
+          user: session?.id,
+          post: post?.id,
+        },
+        { authorization: `Bearer ${session?.jwt}` }
+      )
+      .then(() => setloading(false))
+      .finally(() => Router.reload());
+  };
+
   return (
     <Container>
       <PostCard post={post} />
-      <NewComment />
+      <NewComment
+        // onContentChange={setcontent}
+        loading={loading}
+        onPost={onPost}
+      />
       <CommentsCards data={post.comments} />
       {/* <p>{JSON.stringify(post?.comments)}</p> */}
     </Container>

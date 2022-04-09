@@ -1,6 +1,6 @@
 # codegen.yaml
 schema: http://localhost:1337/graphql
-documents: ./src/gql/queries.ts
+documents: ./src/gql/*.ts
 generates:
   ./__generated__/__types__.ts:
     config:
