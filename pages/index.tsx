@@ -1,16 +1,38 @@
-import React, { useEffect } from "react";
-import { Container, PostsCards, Pagination } from "@components";
-import { client, GET_POSTS } from "@gql";
-import { GetPostsQuery } from "@graphqlTypes/__types__";
+import React, { useEffect, useState } from "react";
+import { Container, PostsCards, Pagination, NewPost } from "@components";
+import { client, GET_POSTS, ADD_POST } from "@gql";
+import { GetPostsQuery, PostInput } from "@graphqlTypes/__types__";
 import { GetStaticProps, GetServerSideProps } from "next";
 import { useRouter } from "next/router";
+import Router from "next/router";
+import { getSession } from "next-auth/client";
 
 type Props = { data: GetPostsQuery; page: number };
 
 const Home: React.FC<Props> = ({ data, page }) => {
+  const [loading, setloading] = useState(false);
+  const onPost = async (
+    title: PostInput["title"],
+    content: PostInput["content"]
+  ) => {
+    setloading(true);
+    const session = await getSession();
+    client
+      .request(
+        ADD_POST,
+        {
+          title,
+          content,
+          user: session?.id,
+        },
+        { authorization: `Bearer ${session?.jwt}` }
+      )
+      .then(() => setloading(false))
+      .finally(() => Router.reload());
+  };
   return (
     <Container>
-      {/* <NewPost /> */}
+      <NewPost loading={loading} onPost={onPost} />
       <PostsCards data={data} />
       <Pagination page={page} />
     </Container>
