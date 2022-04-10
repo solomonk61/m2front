@@ -11,27 +11,35 @@ type Props = { data: GetPostsQuery; page: number };
 
 const Home: React.FC<Props> = ({ data, page }) => {
   const [loading, setloading] = useState(false);
+  const [authModalVisible, setauthModalVisible] = useState(false);
   const onPost = async (
     title: PostInput["title"],
     content: PostInput["content"]
   ) => {
-    setloading(true);
     const session = await getSession();
-    client
-      .request(
-        ADD_POST,
-        {
-          title,
-          content,
-          user: session?.id,
-        },
-        { authorization: `Bearer ${session?.jwt}` }
-      )
-      .then(() => setloading(false))
-      .finally(() => Router.reload());
+    if (session) {
+      setloading(true);
+      client
+        .request(
+          ADD_POST,
+          {
+            title,
+            content,
+            user: session?.id,
+          },
+          { authorization: `Bearer ${session?.jwt}` }
+        )
+        .then(() => setloading(false))
+        .finally(() => Router.reload());
+    } else {
+      setauthModalVisible(true);
+    }
   };
   return (
-    <Container>
+    <Container
+      auth={authModalVisible}
+      onAuthCancel={() => setauthModalVisible(false)}
+    >
       <NewPost loading={loading} onPost={onPost} />
       <PostsCards data={data} />
       <Pagination page={page} />

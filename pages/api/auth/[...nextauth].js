@@ -12,7 +12,7 @@ const options = {
   session: {
     jwt: true,
   },
-  debug: true,
+  // debug: true,
   callbacks: {
     session: async (session, user) => {
       session.jwt = user.jwt;

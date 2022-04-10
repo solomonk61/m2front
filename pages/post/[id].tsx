@@ -19,25 +19,34 @@ type Props = { post: GetPostQuery["post"] };
 
 const Post: React.FC<Props> = ({ post }) => {
   const [loading, setloading] = useState(false);
+  const [authModalVisible, setauthModalVisible] = useState(false);
+
   const onPost = async (content: CommentInput["content"]) => {
-    setloading(true);
     const session = await getSession();
-    client
-      .request(
-        ADD_COMMENT,
-        {
-          content,
-          user: session?.id,
-          post: post?.id,
-        },
-        { authorization: `Bearer ${session?.jwt}` }
-      )
-      .then(() => setloading(false))
-      .finally(() => Router.reload());
+    if (session) {
+      setloading(true);
+      client
+        .request(
+          ADD_COMMENT,
+          {
+            content,
+            user: session?.id,
+            post: post?.id,
+          },
+          { authorization: `Bearer ${session?.jwt}` }
+        )
+        .then(() => setloading(false))
+        .finally(() => Router.reload());
+    } else {
+      setauthModalVisible(true);
+    }
   };
 
   return (
-    <Container>
+    <Container
+      auth={authModalVisible}
+      onAuthCancel={() => setauthModalVisible(false)}
+    >
       <PostCard post={post} />
       <NewComment
         // onContentChange={setcontent}
