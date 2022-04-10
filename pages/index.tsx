@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Container, PostsCards, Pagination, NewPost } from "@components";
+import { Container, PostsCards, Pagination, NewPost, Alert } from "@components";
 import { client, GET_POSTS, ADD_POST } from "@gql";
 import { GetPostsQuery, PostInput } from "@graphqlTypes/__types__";
 import { GetStaticProps, GetServerSideProps } from "next";
-import { useRouter } from "next/router";
 import Router from "next/router";
 import { getSession } from "next-auth/client";
 
@@ -40,6 +39,7 @@ const Home: React.FC<Props> = ({ data, page }) => {
       auth={authModalVisible}
       onAuthCancel={() => setauthModalVisible(false)}
     >
+      <Alert type={"success"} importantText="hello" text="hello" />
       <NewPost loading={loading} onPost={onPost} />
       <PostsCards data={data} />
       <Pagination page={page} />
