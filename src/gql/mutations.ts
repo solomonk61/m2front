@@ -8,6 +8,7 @@ export const ADD_POST = gql`
           users_permissions_user: $user
           title: $title
           content: $content
+          published_at: null
         }
       }
     ) {
