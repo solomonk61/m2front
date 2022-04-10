@@ -63,6 +63,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.query;
   const { post } = await client.request(GET_POST, { id });
 
+  if (!post) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       post,
