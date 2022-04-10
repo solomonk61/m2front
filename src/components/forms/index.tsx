@@ -25,9 +25,7 @@ export const NewComment: React.FC<CommentProps> = ({ onPost, loading }) => {
             placeholder="Type Your Comment"
             required
             onChange={(event) => setcontent(event.target.value)}
-          >
-            {content}
-          </textarea>
+          ></textarea>
         </div>
         <div className="w-full md:w-full flex items-start md:w-full px-3">
           <div className="flex items-start w-1/2 text-gray-700 px-2 mr-auto">
