@@ -35,11 +35,12 @@ export const GET_POSTS = gql`
 
 export const GET_POST = gql`
   query GetPost($id: ID!) {
-    post(id: $id) {
+    post(id: $id, publicationState: PREVIEW) {
       id
       title
       content
       created_at
+      published_at
       upvotes
       downvotes
       users_permissions_user {
@@ -98,6 +99,37 @@ export const GET_COMMENT = gql`
         username
         avatar {
           url
+        }
+      }
+    }
+  }
+`;
+
+export const GET_USER_POSTS = gql`
+  query GetUserPosts($id: ID!) {
+    user(id: $id) {
+      id
+      username
+      name
+      avatar {
+        url
+      }
+      posts {
+        id
+        slug
+        title
+        content
+        created_at
+        upvotes
+        downvotes
+        users_permissions_user {
+          name
+          username
+          avatar {
+            url
+          }
+          birthday
+          created_at
         }
       }
     }

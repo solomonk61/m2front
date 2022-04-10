@@ -14,8 +14,6 @@ export const ADD_POST = gql`
     ) {
       post {
         id
-        title
-        content
       }
     }
   }

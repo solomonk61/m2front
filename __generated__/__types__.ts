@@ -446,6 +446,15 @@ export type UpdateUserInput = {
 };
 
 
+export type CreatePostMutationVariables = Exact<{
+  content?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  user?: Maybe<Scalars['ID']>;
+}>;
+
+
+export type CreatePostMutation = { __typename?: 'Mutation', createPost?: Maybe<{ __typename?: 'createPostPayload', post?: Maybe<{ __typename?: 'Post', id: string }> }> };
+
 export type CreateCommentMutationVariables = Exact<{
   content?: Maybe<Scalars['String']>;
   user?: Maybe<Scalars['ID']>;
@@ -468,7 +477,7 @@ export type GetPostQueryVariables = Exact<{
 }>;
 
 
-export type GetPostQuery = { __typename?: 'Query', post?: Maybe<{ __typename?: 'Post', id: string, title?: Maybe<string>, content?: Maybe<string>, created_at: any, upvotes?: Maybe<number>, downvotes?: Maybe<number>, users_permissions_user?: Maybe<{ __typename?: 'UsersPermissionsUser', name?: Maybe<string>, username: string, birthday?: Maybe<any>, created_at: any, avatar?: Maybe<{ __typename?: 'UploadFile', url: string }> }>, topics?: Maybe<Array<Maybe<{ __typename?: 'Topic', name?: Maybe<string> }>>>, comments?: Maybe<Array<Maybe<{ __typename?: 'Comment', id: string, content?: Maybe<string>, created_at: any, upvotes?: Maybe<number>, downvotes?: Maybe<number>, users_permissions_user?: Maybe<{ __typename?: 'UsersPermissionsUser', username: string, avatar?: Maybe<{ __typename?: 'UploadFile', url: string }> }> }>>> }> };
+export type GetPostQuery = { __typename?: 'Query', post?: Maybe<{ __typename?: 'Post', id: string, title?: Maybe<string>, content?: Maybe<string>, created_at: any, published_at?: Maybe<any>, upvotes?: Maybe<number>, downvotes?: Maybe<number>, users_permissions_user?: Maybe<{ __typename?: 'UsersPermissionsUser', name?: Maybe<string>, username: string, birthday?: Maybe<any>, created_at: any, avatar?: Maybe<{ __typename?: 'UploadFile', url: string }> }>, topics?: Maybe<Array<Maybe<{ __typename?: 'Topic', name?: Maybe<string> }>>>, comments?: Maybe<Array<Maybe<{ __typename?: 'Comment', id: string, content?: Maybe<string>, created_at: any, upvotes?: Maybe<number>, downvotes?: Maybe<number>, users_permissions_user?: Maybe<{ __typename?: 'UsersPermissionsUser', username: string, avatar?: Maybe<{ __typename?: 'UploadFile', url: string }> }> }>>> }> };
 
 export type GetCommentsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -481,3 +490,10 @@ export type GetCommentQueryVariables = Exact<{
 
 
 export type GetCommentQuery = { __typename?: 'Query', comment?: Maybe<{ __typename?: 'Comment', id: string, content?: Maybe<string>, created_at: any, upvotes?: Maybe<number>, users_permissions_user?: Maybe<{ __typename?: 'UsersPermissionsUser', username: string, avatar?: Maybe<{ __typename?: 'UploadFile', url: string }> }> }> };
+
+export type GetUserPostsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetUserPostsQuery = { __typename?: 'Query', user?: Maybe<{ __typename?: 'UsersPermissionsUser', id: string, username: string, name?: Maybe<string>, avatar?: Maybe<{ __typename?: 'UploadFile', url: string }>, posts?: Maybe<Array<Maybe<{ __typename?: 'Post', id: string, slug?: Maybe<string>, title?: Maybe<string>, content?: Maybe<string>, created_at: any, upvotes?: Maybe<number>, downvotes?: Maybe<number>, users_permissions_user?: Maybe<{ __typename?: 'UsersPermissionsUser', name?: Maybe<string>, username: string, birthday?: Maybe<any>, created_at: any, avatar?: Maybe<{ __typename?: 'UploadFile', url: string }> }> }>>> }> };

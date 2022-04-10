@@ -129,7 +129,7 @@ export const NewPost: React.FC<PostProps> = ({ loading, onPost }) => {
                 />
               </svg>
             )}
-            {loading ? "Posting..." : "Post Comment"}
+            {loading ? "Posting..." : "Publish Post"}
           </button>
         </div>
       </div>

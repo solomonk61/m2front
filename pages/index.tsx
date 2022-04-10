@@ -28,8 +28,11 @@ const Home: React.FC<Props> = ({ data, page }) => {
           },
           { authorization: `Bearer ${session?.jwt}` }
         )
-        .then(() => setloading(false))
-        .finally(() => Router.reload());
+        .then(({ createPost: { post } }) => {
+          setloading(false);
+          Router.push(`post/${post.id}`);
+        });
+      // .finally(() => Router.reload());
     } else {
       setauthModalVisible(true);
     }
@@ -39,7 +42,7 @@ const Home: React.FC<Props> = ({ data, page }) => {
       auth={authModalVisible}
       onAuthCancel={() => setauthModalVisible(false)}
     >
-      <Alert type={"success"} importantText="hello" text="hello" />
+      {/* <Alert type={"success"} importantText="hello" text="hello" /> */}
       <NewPost loading={loading} onPost={onPost} />
       <PostsCards data={data} />
       <Pagination page={page} />
