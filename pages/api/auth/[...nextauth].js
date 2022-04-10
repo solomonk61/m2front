@@ -53,6 +53,9 @@ const options = {
     jwt: async (token, user, account) => {
       const isSignIn = user ? true : false;
 
+      // console.log('account.provider')
+      // console.log(account.provider)
+
       if (isSignIn && account.provider) {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/auth/${account.provider}/callback?access_token=${account?.accessToken}`
@@ -67,6 +70,7 @@ const options = {
         token.id = user.user.id;
         token.name = user.user.username;
         token.email = user.user.email;
+        token.picture = `${process.env.NEXT_PUBLIC_API_URL}${user.user.avatar.formats.small.url}`
       }
 
       return Promise.resolve(token);

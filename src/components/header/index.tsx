@@ -22,7 +22,7 @@ export const Header: React.FC = () => {
         </Link>
         {session ? (
           <div className="flex items-center md:order-2">
-            {/* {JSON.stringify(session.jwt)} */}
+            {/* {JSON.stringify(session)} */}
             <button
               type="button"
               className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
