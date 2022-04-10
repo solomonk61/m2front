@@ -1,8 +1,38 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
+import axios from "axios";
 
 const options = {
   providers: [
+    Providers.Credentials({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text", placeholder: "test@test.com" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        try {
+          const { data } = await axios.post(
+            `${process.env.NEXT_PUBLIC_API_URL}/auth/local`,
+            {
+              identifier: credentials.email,
+              password: credentials.password,
+            }
+          );
+          if (data) {
+            return data;
+          } else {
+            return null;
+          }
+        } catch (e) {
+          // console.log('caught error');
+          // const errorMessage = e.response.data.message
+          // Redirecting to the login page with error message          in the URL
+          // throw new Error(errorMessage + '&email=' + credentials.email)
+          return null;
+        }
+      },
+    }),
     Providers.Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -23,7 +53,7 @@ const options = {
     jwt: async (token, user, account) => {
       const isSignIn = user ? true : false;
 
-      if (isSignIn) {
+      if (isSignIn && account.provider) {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/auth/${account.provider}/callback?access_token=${account?.accessToken}`
         );
@@ -32,6 +62,11 @@ const options = {
 
         token.jwt = data.jwt;
         token.id = data.user.id;
+      } else if (isSignIn) {
+        token.jwt = user.jwt;
+        token.id = user.user.id;
+        token.name = user.user.username;
+        token.email = user.user.email;
       }
 
       return Promise.resolve(token);

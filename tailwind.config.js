@@ -4,7 +4,6 @@ module.exports = {
     "./src/**/*.tsx",
     "./node_modules/flowbite/**/*.js",
   ],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
   },
